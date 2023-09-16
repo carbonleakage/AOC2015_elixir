@@ -5,7 +5,11 @@ defmodule Aoc2015.Common do
     |> String.trim()
   end
 
-  def read_input_as_list(day_number) do
+  def read_input_as_list_split_by_character(day_number) do
     read_input(day_number) |> String.split("", trim: true)
+  end
+
+  def read_input_as_list_split_by_line(day_number) do
+    read_input(day_number) |> String.split("\n", trim: true)
   end
 end

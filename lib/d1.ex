@@ -2,12 +2,12 @@ defmodule Aoc2015.D1 do
   alias Aoc2015.Common
 
   def part1() do
-    Common.read_input_as_list(1)
+    Common.read_input_as_list_split_by_character(1)
     |> calculate_current_floor
   end
 
   def part2() do
-    Common.read_input_as_list(1)
+    Common.read_input_as_list_split_by_character(1)
     |> find_position_that_enters_basement
   end
 
