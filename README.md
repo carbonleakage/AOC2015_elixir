@@ -1,21 +1,4 @@
-# Aoc2015
+# Advent of Code 2015 - Elixir version
 
-**TODO: Add description**
-
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `aoc_2015` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:aoc_2015, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/aoc_2015>.
-
+I am learning Elixir starting September 2023, this repo contains the code that
+I am writing to solve the AOC puzzles.
