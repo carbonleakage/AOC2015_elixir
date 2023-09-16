@@ -3,6 +3,7 @@ defmodule Aoc2015Test do
   alias Aoc2015.D1
   alias Aoc2015.D2
   alias Aoc2015.D3
+  alias Aoc2015.D4
 
   test "day1: going up one floor is (" do
     assert D1.calculate_current_floor(["("]) == 1
@@ -67,5 +68,15 @@ defmodule Aoc2015Test do
              "v"
            ]) ==
              11
+  end
+
+  test "day4: number that combined with secret key generates 5 zeroes" do
+    assert D4.find_number("abcdef", 5) == 609_043
+    assert D4.find_number("pqrstuv", 5) == 1_048_970
+  end
+
+  test "day4: crank that cpu, search 6 zeros md5" do
+    assert D4.find_number("abcdef", 6) == 6_742_839
+    assert D4.find_number("pqrstuv", 6) == 5_714_438
   end
 end
