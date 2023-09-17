@@ -102,4 +102,25 @@ defmodule Aoc2015Test do
     assert "haegwjzuvuyypxyu" |> D5.part1_check() == false
     assert "dvszwmarrgswjxmb" |> D5.part1_check() == false
   end
+
+  test "day5: part2, contains char pair with something in between" do
+    assert D5.pair_with_letter_between("qjhvhtzxzqqjkmpb") == true
+    assert D5.pair_with_letter_between("xxyxx") == true
+    assert D5.pair_with_letter_between("uurcxstgmygtbstg") == false
+    assert D5.pair_with_letter_between("ieodomkazucvgmuy") == true
+  end
+
+  test "day5: part2, pair appears twice" do
+    assert D5.pair_appears_twice?("qjhvhtzxzqqjkmpb") == true
+    assert D5.pair_appears_twice?("xxyxx") == true
+    assert D5.pair_appears_twice?("uurcxstgmygtbstg") == true
+    assert D5.pair_appears_twice?("ieodomkazucvgmuy") == false
+  end
+
+  test "day5: part2, full logic" do
+    assert D5.part2_check("qjhvhtzxzqqjkmpb") == true
+    assert D5.part2_check("xxyxx") == true
+    assert D5.part2_check("uurcxstgmygtbstg") == false
+    assert D5.part2_check("ieodomkazucvgmuy") == false
+  end
 end

@@ -6,18 +6,18 @@ defmodule Aoc2015.D5 do
     |> String.graphemes()
   end
 
-  defp get_char_pair_list(input_string) do
+  defp get_char_chunk_list(input_string, chunk_length) do
     input_string
     |> String.graphemes()
-    |> Enum.chunk_every(2, 1)
-    |> Enum.filter(&(Enum.count(&1) == 2))
+    |> Enum.chunk_every(chunk_length, 1)
+    |> Enum.filter(&(Enum.count(&1) == chunk_length))
   end
 
   def has_min_vowels?(input_string, min_vowels) do
     get_char_list(input_string)
     |> Enum.reduce(%{}, fn char, acc -> Map.update(acc, char, 1, &(&1 + 1)) end)
     |> count_vowels()
-    |> (&(&1 >= 3)).()
+    |> (&(&1 >= min_vowels)).()
   end
 
   defp count_vowels(map_freq) do
@@ -27,11 +27,11 @@ defmodule Aoc2015.D5 do
   end
 
   def has_pairs?(input_string) do
-    input_string |> get_char_pair_list |> Enum.reduce_while(false, &same_char?/2)
+    input_string |> get_char_chunk_list(2) |> Enum.reduce_while(false, &same_char_pair?/2)
   end
 
-  defp same_char?([a, a], _), do: {:halt, true}
-  defp same_char?(_, _), do: {:cont, false}
+  defp same_char_pair?([a, a], _), do: {:halt, true}
+  defp same_char_pair?(_, _), do: {:cont, false}
 
   def contains_blacklisted_substrings?(input_string) do
     ["ab", "cd", "pq", "xy"]
@@ -47,5 +47,37 @@ defmodule Aoc2015.D5 do
 
   def part1 do
     Common.read_input_as_list_split_by_line(5) |> Enum.filter(&part1_check/1) |> Enum.count()
+  end
+
+  def pair_with_letter_between(input_string) do
+    input_string |> get_char_chunk_list(3) |> Enum.reduce_while(false, &same_start_end_char?/2)
+  end
+
+  defp same_start_end_char?([a, _, a], _), do: {:halt, true}
+  defp same_start_end_char?(_, _), do: {:cont, false}
+
+  def pair_appears_twice?(input_string) do
+    pair_repeat_check(false, input_string)
+  end
+
+  defp pair_repeat_check(false, ""), do: false
+
+  defp pair_repeat_check(false, input_string) do
+    String.slice(input_string, 0..1)
+    |> check_substring?(String.slice(input_string, 2..-1))
+    |> pair_repeat_check(String.slice(input_string, 1..-1))
+  end
+
+  defp pair_repeat_check(true, _), do: true
+
+  defp check_substring?(sub_string, remaining_string),
+    do: String.contains?(remaining_string, sub_string)
+
+  def part2_check(input_string) do
+    pair_appears_twice?(input_string) && pair_with_letter_between(input_string)
+  end
+
+  def part2 do
+    Common.read_input_as_list_split_by_line(5) |> Enum.filter(&part2_check/1) |> Enum.count()
   end
 end
