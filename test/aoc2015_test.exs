@@ -4,6 +4,7 @@ defmodule Aoc2015Test do
   alias Aoc2015.D2
   alias Aoc2015.D3
   alias Aoc2015.D4
+  alias Aoc2015.D5
 
   test "day1: going up one floor is (" do
     assert D1.calculate_current_floor(["("]) == 1
@@ -70,13 +71,35 @@ defmodule Aoc2015Test do
              11
   end
 
+  @tag :slow
   test "day4: number that combined with secret key generates 5 zeroes" do
     assert D4.find_number("abcdef", 5) == 609_043
     assert D4.find_number("pqrstuv", 5) == 1_048_970
   end
 
+  @tag :slow
   test "day4: crank that cpu, search 6 zeros md5" do
     assert D4.find_number("abcdef", 6) == 6_742_839
     assert D4.find_number("pqrstuv", 6) == 5_714_438
+  end
+
+  test "day5: has min 3 vowels" do
+    assert "ugknbfddgicrmopn" |> D5.has_min_vowels?(3) == true
+  end
+
+  test "day5: does not contain black listed substrings" do
+    assert "ugknbfddgicrmopn" |> D5.contains_blacklisted_substrings?() == false
+  end
+
+  test "day5: contains char pairs" do
+    assert "ugknbfddgicrmopn" |> D5.has_pairs?() == true
+  end
+
+  test "day5: test part1" do
+    assert "ugknbfddgicrmopn" |> D5.part1_check() == true
+    assert "aaa" |> D5.part1_check() == true
+    assert "jchzalrnumimnmhp" |> D5.part1_check() == false
+    assert "haegwjzuvuyypxyu" |> D5.part1_check() == false
+    assert "dvszwmarrgswjxmb" |> D5.part1_check() == false
   end
 end
